@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado do Cálculo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fa;
+            padding: 30px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #005bbb;
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            background: #e7f4ff;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 6px solid #005bbb;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .result-box p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        a.button {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 12px 25px;
+            background-color: #005bbb;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        a.button:hover {
+            background-color: #004999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Resultado do Cálculo</h2>
+
+        {% if resultado.tipo == 'lucro' %}
+            <div class="result-box">
+                <p><strong>Preço de venda:</strong> R$ {{ resultado.preco_venda | round(2) }}</p>
+                <p><strong>Lucro líquido:</strong> R$ {{ resultado.lucro | round(2) }}</p>
+                <p><strong>Margem de lucro:</strong> {{ resultado.margem | round(2) }}%</p>
+            </div>
+        {% elif resultado.tipo == 'preco_minimo' %}
+            <div class="result-box">
+                <p><strong>Margem desejada:</strong> {{ resultado.margem_desejada | round(2) }}%</p>
+                <p><strong>Preço mínimo necessário:</strong> R$ {{ resultado.preco_necessario | round(2) }}</p>
+            </div>
+        {% else %}
+            <p>Você precisa preencher o preço de venda ou a margem desejada.</p>
+        {% endif %}
+
+        <a href="/" class="button">Voltar</a>
+    </div>
+</body>
+</html>
